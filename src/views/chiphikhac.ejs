@@ -1,0 +1,64 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/stylesForm.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="topnav">
+        <a class="active" href="/">Home</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+        <a href="/chiphikhac">Chi phí khác</a>
+    </div>
+
+    <div class="container">
+        <h2>Chi phí khác</h2>
+        <a href="/add-chiphikhac" class="btn btn-success float-right">Thêm chi phí khác</a>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Nội dung</th>
+                    <th>Số tiền</th>
+                    <th>Ghi chú</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <% chiphikhacs.forEach((entry) => { %>
+                <tr ondblclick="handleUpdateProduct('<%= entry.id %>')">
+                    <td>
+                        <%= entry.stt %>
+                    </td>
+                    <td>
+                        <%= entry.noidung %>
+                    </td>
+                    <td>
+                        <%= entry.sotien %>
+                    </td>
+                    <td>
+                        <%= entry.ghichu %>
+                    </td>
+                    <td>
+                        <input class="btn btn-primary" type="button" value="Update" onclick="handleUpdateProduct('<%= entry.id %>')">
+                        <input class="btn btn-primary" type="button" value="Delete" onclick="handleUpdateProduct('<%= entry.id %>')">
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
+        <script>
+            function handleUpdateProduct(value) {
+                $(location).attr('href', '/update-product/' + value);
+            }
+        </script>
+    </div>
+</body>
+
+</html>
