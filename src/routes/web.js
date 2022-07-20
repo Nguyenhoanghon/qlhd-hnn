@@ -7,27 +7,63 @@ const initWebRouter = (app) => {
     router.get('/', homeController.getHomepage);
     //Hàm gọi trang chi phi khac
     router.get('/chiphikhac', chiphikhacController.getChiPhiKhac);
+
     router.get('/add-chiphikhac', (req, res) => {
         res.render('add-chiphikhac.ejs')
     });
     router.post('/themchiphi', chiphikhacController.getThemChiPhiKhac);
 
-    /* //==============
+    router.get('/navbar', (req, res) => {
+        res.render('navbar.ejs')
+    });
+    router.get('/headercss', (req, res) => {
+        res.render('headercss.ejs')
+    });
+    router.get('/pthd', (req, res) => {
+        res.render('pthd.ejs')
+    });
+    /*===== routes xử lý form chi tiết hàng hóa */
+    //route goi hiển thị chi tiết collection hàng hóa
+    router.get('/chitiethanghoa', (req, res) => {
+        res.render('chitiethanghoa.ejs')
+    });
+    // route goi pages add-hanghoa
+    router.post('/add-hanghoa', (req, res) => {
+        res.render('add-hanghoa.ejs');
+    });
 
-        //Hàm gọi trang Forms
-        router.get('/form', homeController.getFormPage);
-        // Router parameter
-        router.get('/detail/:userID', homeController.getDetailPage);
-        //Router add new user
-        router.post('/add-new-user', homeController.getAddUser);
-        //Router delete user
-        router.post('/delete-user', homeController.getDeleteUser);
-        //Router Edit user
-        router.get('/edit-user/:userID', homeController.getEditUser);
-        //Router Update user
-        router.post('/update-user', homeController.PostUpdateUser);
-    //=====
-     */
+    /*========= routes xử lý chi phí vốn */
+    router.get('/chiphivon', (req, res) => {
+        res.render('chiphivon.ejs')
+    });
+    //route gọi trang add chi phí vốn
+    router.get('/add-chiphivon', (req, res) => {
+        res.render('add-chiphivon.ejs')
+    });
+    /*===== routes xử lý chi phí triển khai */
+    router.get('/chiphitrienkhai', (req, res) => {
+        res.render('chiphitrienkhai.ejs')
+    });
+    //route goi trang them chi phí triển khai
+    router.get('/add-chiphitrienkhai', (req, res) => {
+        res.render('add-chiphitrienkhai.ejs')
+    });
+    /* === Routes xử lý Form Manday kỹ sư */
+    router.get('/mandaykysu', (req, res) => {
+        res.render('mandaykysu.ejs')
+    });
+    //route goi trang them Manday kỹ sư
+    router.get('/add-mandaykysu', (req, res) => {
+        res.render('add-mandaykysu.ejs')
+    });
+    /* === Routes xử lý Form chi phí bảo lãnh */
+    router.get('/chiphibaolanh', (req, res) => {
+        res.render('chiphibaolanh.ejs')
+    });
+    //route goi trang them Manday kỹ sư
+    router.get('/add-chiphibaolanh', (req, res) => {
+        res.render('add-chiphibaolanh.ejs')
+    });
     return app.use('/', router)
 }
 
