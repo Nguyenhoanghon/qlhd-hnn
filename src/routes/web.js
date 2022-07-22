@@ -5,13 +5,8 @@ let router = express.Router();
 const initWebRouter = (app) => {
     //Hàm gọi Home page
     router.get('/', homeController.getHomepage);
-    //Hàm gọi trang chi phi khac
-    router.get('/chiphikhac', chiphikhacController.getChiPhiKhac);
 
-    router.get('/add-chiphikhac', (req, res) => {
-        res.render('add-chiphikhac.ejs')
-    });
-    router.post('/themchiphi', chiphikhacController.getThemChiPhiKhac);
+
 
     router.get('/navbar', (req, res) => {
         res.render('navbar.ejs')

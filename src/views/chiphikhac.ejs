@@ -23,31 +23,76 @@
                         <th>Action </th>
                     </tr>
                 </thead>
-                <% chiphikhacs.forEach((entry) => { %>
+                <% var tong = 0;
+                chiphikhacs.forEach((entry) => { tong = tong + entry.sotien %>
                     <tr ondblclick="handleUpdateProduct('<%= entry.id %>')">
                         <td>
-                            <%= entry.stt %>
+                            <%= entry.id %>
                         </td>
                         <td>
                             <%= entry.noidung %>
                         </td>
-                        <td>
-                            <%= entry.sotien %>
+                        <td align="right">
+                            <%= entry.sotien.toLocaleString() %>
                         </td>
                         <td>
                             <%= entry.ghichu %>
                         </td>
                         <td width="15%">
-                            <input class="btn btn-primary btn-sm" type="button" value="Update" onclick="handleUpdateProduct('')">
-                            <input class="btn btn-primary btn-sm" type="button" value="Delete" onclick="handleUpdateProduct('')">
+                            <!-- <input class="btn btn-primary btn-sm" type="button" value="Update" onclick="handleUpdate('<%= entry.id %>')"> -->
+                            <a href="javascript:;" onClick="handleUpdate('<%= entry.id %>')" class="btn btn-xs btn-primary btn-update" title="Update">Update</a>
+                            <!-- <input class="btn btn-primary btn-sm" type="button" value="Delete" onclick="handleDelete('<%= entry.id %>')"> -->
+                            <a href="javascript:;" onClick="if(confirm('Are you sure you want to delete?')){handleDelete('<%= entry.id %>');}else{ }" class="btn btn-xs btn-danger btn-delete" title="Del Product">Delete</a>
                         </td>
                     </tr>
-                    <% }) %>
+                    <% } )%>
+                        <tr>
+                            <td colspan="2" align="center"> TỔNG CỘNG </td>
+                            <td align="right">
+                                <%= tong.toLocaleString()%>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
             </table>
 
             <script>
-                function handleUpdateProduct(value) {
-                    $(location).attr('href', '/update-product/' + value);
+                function handleUpdate(value) {
+                    $(location).attr('href', '/load-update/' + value);
+                }
+            </script>
+            <script>
+                function handleDelete(value) {
+                    $(location).attr('href', '/deletechiphi/' + value);
+                }
+            </script>
+            <script>
+                function del_product(id) {
+                    $('.process').css('display', 'block');
+                    $('.process').html('<img src="./images/loading.gif">');
+                    $.ajax({
+                        'url': './process.php?action=del_product&id=' + id,
+                        'type': "post",
+                        success: function(result) {
+                            info = JSON.parse(result);
+                            if (result.status == 1) {
+                                setTimeout(function() {
+                                    $('.process').hide();
+                                    $('.tr_' + id).hide();
+                                }, 3000);
+                                setTimeout(function() {
+                                    $('.process').html(result.notice);
+                                }, 1000);
+                            } else if (result.status == 0) {
+                                setTimeout(function() {
+                                    $('.process').hide();
+                                }, 3000);
+                                setTimeout(function() {
+                                    $('.process').html(result.notice);
+                                }, 1000);
+                            }
+                        }
+                    });
                 }
             </script>
         </div>

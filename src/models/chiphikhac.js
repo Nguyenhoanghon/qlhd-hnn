@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 
-var chiphikhacSchema = mongoose.Schema({
-    stt: {
-        type: Number,
-        default: 'No Name'
+const chiphikhacSchema = mongoose.Schema({
+    _id: {
+        type: Number
     },
     noidung: {
         type: String,
@@ -17,6 +17,11 @@ var chiphikhacSchema = mongoose.Schema({
         type: String,
         default: 'No Type'
     }
+}, {
+    _id: false,
+    timestamp: true,
 });
+
+chiphikhacSchema.plugin(AutoIncrement);
 
 module.exports = mongoose.model('chiphikhac', chiphikhacSchema, 'chiphikhac');

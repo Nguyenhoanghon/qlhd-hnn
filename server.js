@@ -13,6 +13,11 @@ app.use(express.json());
 //cấu hình router
 import initWebRouter from './src/routes/web';
 initWebRouter(app);
+//cấu hình router
+import initchiphikhac from './src/routes/chiphikhacRoute';
+initchiphikhac(app);
+
+
 
 app.get('/about', (req, res) => {
     res.send('About Page')

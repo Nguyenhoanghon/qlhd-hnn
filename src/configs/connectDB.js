@@ -10,7 +10,7 @@ class Database {
     _connect() {
         mongoose.connect(mongodb_url, { useNewUrlParser: true })
             .then(() => {
-                console.log("Database connection successfully!");
+                console.log("Kết nối Mongodb successfully!");
             })
             .catch(err => {
                 console.log("Database connection error!");
